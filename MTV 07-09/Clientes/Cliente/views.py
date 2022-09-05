@@ -2,6 +2,7 @@ from django.shortcuts import render
 from models import *
 from django.template import context, Template, loader
 from django.http import HttpResponse
+from forms import ClientForm
 
 # Create your views here.
 
@@ -20,3 +21,52 @@ def cliente(request):
   clientes=plantillas.render(clientes)
   
   return HttpResponse("clientes")
+
+def Inicio(request):
+    return render (request, "Clientes\Plantilla\Clientes.html")
+
+def clientes(request):
+  return render (request, "Clientes\Plantilla\Clientes.html")
+
+
+def facturas(request):
+  return render (request, "Clientes\Plantilla\Facturas.html")  
+
+def recibos(request):
+  return render (request, "Clientes\Plantilla\Recibos.html")  
+
+
+def Clientes(request):
+
+    if request.method=="POST":
+        form= ClientForm(request.POST)
+        if form.is_valid():
+            info= form.cleaned_data
+            nombre= info["nombre"]
+            número= info["número"]
+            email= info["email"]
+            cliente= Clientes(nombre=nombre, número=número, email=email)
+            cliente.save()
+            return render (request, "Clientes\Plantilla\Inicio.html", {"mensaje":"Cliente creado"})
+    else:
+        form= ClientForm()
+    return render(request, "Clientes\Plantilla\Clientes.html", {"formulario":form})
+
+##################################################################################################
+def Busquedacliente(request):
+    return render(request, "Clientes/Busquedacliente.html")
+
+def buscar(request):
+    if request.GET["clientes"]:
+
+      número=request.GET["número"]
+       
+      Clientes=Clientes.objects.filter(número=número)
+      return render(request, "Clientes/ResultadosBusqueda.html", {"Clientes":Clientes})
+    else:
+      return render(request, "Clientes/Busquedacliente.html", {"mensaje":"Por favor, ingrese un cliente válido"})
+    
+    return HttpResponse(respuesta)
+
+
+
