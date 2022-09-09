@@ -9,9 +9,9 @@ from forms import ClientForm
 
 
 def cliente(request):
-  cliente1= clientes(nombre="",número=1000, fecha_de_emisión="25-08-2022")
-  cliente2= clientes(nombre="",número=1001, fecha_de_emisión="01-07-2022")
-  cliente3= clientes(nombre="",número=1002, fecha_de_emisión="10-01-2022")
+  cliente1= clientes(nombre="Disco",número=1000, fecha_de_emisión="25-08-2022")
+  cliente2= clientes(nombre="Coto",número=1001, fecha_de_emisión="01-07-2022")
+  cliente3= clientes(nombre="Dia",número=1002, fecha_de_emisión="10-01-2022")
 
   cliente1.save()
   cliente2.save()

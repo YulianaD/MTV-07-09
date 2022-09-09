@@ -17,4 +17,9 @@ class retenciones(models.Model):
     número= models.IntegerField()
     fecha_de_emisión = models.DateField()
 
+class clientes(models.Model):
+    nombre_de_cliente= models.CharField(max_length=50)
+    número= models.IntegerField()
+    fecha_de_alta = models.DateField()
+
    
